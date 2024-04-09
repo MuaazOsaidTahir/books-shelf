@@ -2,9 +2,11 @@
 import { SignUp, logIn, types } from "@/types/types";
 import { cookies } from "next/headers";
 
+const url = "https://books-shelf-psi.vercel.app"
+
 export const getCurrentUser = async () => {
     try {
-        const res = await fetch(process.env.URL + "/api/user", {
+        const res = await fetch(url + "/api/user", {
             headers: { Cookie: cookies().toString() }
         });
 
@@ -20,7 +22,7 @@ export const getCurrentUser = async () => {
 }
 
 export const signupUser = async (formData: SignUp): Promise<{ data?: SignUp, isSuccess?: boolean }> => {
-    const res = await fetch(process.env.URL + "/api/user?type=create", {
+    const res = await fetch(url + "/api/user?type=create", {
         method: "POST",
         body: JSON.stringify(formData)
     });
@@ -37,7 +39,7 @@ export const signupUser = async (formData: SignUp): Promise<{ data?: SignUp, isS
 }
 
 export const loginUser = async (formData: logIn): Promise<{ data?: SignUp, isSuccess?: boolean }> => {
-    const res = await fetch(process.env.URL + "/api/user?type=login", {
+    const res = await fetch(url + "/api/user?type=login", {
         method: "POST",
         body: JSON.stringify(formData)
     });
@@ -55,7 +57,7 @@ export const loginUser = async (formData: logIn): Promise<{ data?: SignUp, isSuc
 
 export const getBooks = async () => {
     try {
-        const res = await fetch(process.env.URL + "/api/books", {
+        const res = await fetch(url + "/api/books", {
             headers: { Cookie: cookies().toString() }
         });
         const data = await res.json();
@@ -72,7 +74,7 @@ export const getBooks = async () => {
 
 export const updateBook = async (body: { id: string, status: { status: types } }) => {
     try {
-        const res = await fetch(process.env.URL + "/api/books", {
+        const res = await fetch(url + "/api/books", {
             method: "PUT",
             body: JSON.stringify(body),
             headers: { Cookie: cookies().toString() }
@@ -89,7 +91,7 @@ export const updateBook = async (body: { id: string, status: { status: types } }
 
 export const uploadBook = async (data: FormData) => {
     try {
-        const res = await fetch(process.env.URL + "/api/books", {
+        const res = await fetch(url + "/api/books", {
             method: "POST",
             body: data,
             headers: { Cookie: cookies().toString() }
@@ -107,7 +109,7 @@ export const uploadBook = async (data: FormData) => {
 
 export const deleteUser = async () => {
     try {
-        const res = await fetch(process.env.URL + "/api/user", {
+        const res = await fetch(url + "/api/user", {
             method: "DELETE",
             headers: { Cookie: cookies().toString() }
         });
